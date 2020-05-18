@@ -1,8 +1,10 @@
+package udp;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class ChatServer extends Thread {
+public class UdpChatServer extends Thread {
     public final static int PORT = 7331;
     private final static int BUFFER = 1024;
     
@@ -10,7 +12,8 @@ public class ChatServer extends Thread {
     private ArrayList<InetAddress> clientAddresses;
     private ArrayList<Integer> clientPorts;
     private HashSet<String> existingClients;
-    public ChatServer() throws IOException {
+    
+    public UdpChatServer() throws IOException {
         socket = new DatagramSocket(PORT);
         clientAddresses = new ArrayList();
         clientPorts = new ArrayList();
@@ -25,7 +28,7 @@ public class ChatServer extends Thread {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
                 
-                String content = new String(buf, buf.length);
+                String content = new String(buf, 0, buf.length);
                 
                 InetAddress clientAddress = packet.getAddress();
                 int clientPort = packet.getPort();
@@ -52,7 +55,7 @@ public class ChatServer extends Thread {
     }
     
     public static void main(String args[]) throws Exception {
-        ChatServer s = new ChatServer();
+        UdpChatServer s = new UdpChatServer();
         s.start();
     }
 }
