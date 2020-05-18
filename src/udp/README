@@ -1,0 +1,9 @@
+JChat
+-------------------------------------------------------------
+A simple UDP-based command line chat client in Java. 
+
+Instructions
+-------------------------------------------------------------
+Start server by java udp.ChatServer
+Start clients by java udp.ChatClient <server_hostname>
+

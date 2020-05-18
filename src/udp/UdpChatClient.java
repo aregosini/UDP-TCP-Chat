@@ -1,3 +1,5 @@
+package udp;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -60,7 +62,7 @@ class MessageReceiver implements Runnable {
         }
     }
 }
-public class ChatClient {
+public class UdpChatClient {
     
     public static void main(String args[]) throws Exception {
         String host = null;
