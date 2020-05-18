@@ -9,6 +9,7 @@ class MessageSender implements Runnable {
     public final static int PORT = 7331;
     private DatagramSocket sock;
     private String hostname;
+    
     MessageSender(DatagramSocket s, String h) {
         sock = s;
         hostname = h;
@@ -42,6 +43,7 @@ class MessageSender implements Runnable {
         }
     }
 }
+
 class MessageReceiver implements Runnable {
     DatagramSocket sock;
     byte buf[];

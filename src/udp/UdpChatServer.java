@@ -12,6 +12,7 @@ public class UdpChatServer extends Thread {
     private ArrayList<InetAddress> clientAddresses;
     private ArrayList<Integer> clientPorts;
     private HashSet<String> existingClients;
+    
     public UdpChatServer() throws IOException {
         socket = new DatagramSocket(PORT);
         clientAddresses = new ArrayList();
@@ -27,7 +28,7 @@ public class UdpChatServer extends Thread {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
                 
-                String content = new String(buf, buf.length);
+                String content = new String(buf, 0, buf.length);
                 
                 InetAddress clientAddress = packet.getAddress();
                 int clientPort = packet.getPort();
