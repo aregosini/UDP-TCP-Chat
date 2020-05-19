@@ -5,11 +5,8 @@
  */
 package udp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.*;
-
 /**
  *
  * @author alby
@@ -30,7 +27,6 @@ public class EchoClient {
         buf = msg.getBytes();
         DatagramPacket packet = new DatagramPacket(buf, buf.length, address, PORT);
         socket.send(packet);
-        packet = new DatagramPacket(buf, buf.length);
         socket.receive(packet);
         String received = new String(packet.getData(), 0, packet.getLength());
         return received;
@@ -41,7 +37,7 @@ public class EchoClient {
     }
     
     public static void main(String args[]) throws Exception {
-        String host = null;
+        String host = null,msg;
         if (args.length < 1) {
             System.out.println("Usage: java EchoClient <server_hostname>");
             System.exit(0);
@@ -53,10 +49,7 @@ public class EchoClient {
         while (true) {
             try {
                 System.out.print("send: ");
-                while (!in.ready()) {
-                    Thread.sleep(100);
-                }
-                String msg = c.sendEcho(in.readLine());
+                msg = c.sendEcho(in.readLine());
                 System.out.println("receive: "+msg);
             } catch(Exception e) {
                 System.err.println(e);
